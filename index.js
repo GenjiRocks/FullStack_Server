@@ -11,6 +11,9 @@ const cors = require('cors')
 // import the routes - after creating routes (1)
 const router = require('./routes')
 
+// Import connection.js After mongoose setup
+require('./connection')
+
 const pfserver = express()
 
 // use of cors - communicate between and view and server
