@@ -1,9 +1,31 @@
-
+const users = require('../Model/userModel')
 
 // controller for Resgister
- exports.registerController = (req,res)=>{
+ exports.registerController = async (req,res)=>{
     const{username, email, password} = req.body
-    console.log(username,email,password);
-    res.status(200).json('register req received')
-    
+   //  console.log(username,email,password);
+   //  res.status(200).json('register req received')
+   try{
+      const exsistingUser = await users.findOne({email})
+      if(exsistingUser){
+         res.status(406).json({message:'user already exist with this email'}) /* 406 - unprocessable entity */
+   }
+   else{
+      const newUser = new users({
+         username,
+         email,
+         password,
+         github:"",
+         linkedin:"",
+         profile:""
+      })
+      // save() - to store data in mongoDB
+      await newUser.save()
+      res.status(200).json(newUser)
+
+   } 
+ } catch(error){
+   req.status(401).json(`registration failed due to ${error}`)
  }
+
+}
