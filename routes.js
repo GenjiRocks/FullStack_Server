@@ -10,6 +10,9 @@ const router = new express.Router();
 //post register request
 router.post('/register', userController.registerController)
 
+// post login request 
+router.post('/login', userController.loginController)
+
 
 
 // 4, Export the router
