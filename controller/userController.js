@@ -33,7 +33,7 @@ const users = require('../Model/userModel')
 
 }
 
-// login
+//controller for login
 exports.loginController = async (req,res)=>{
    const{email,password} = req.body
    try{

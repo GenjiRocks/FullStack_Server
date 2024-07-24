@@ -2,6 +2,7 @@
 const express = require('express');
 // 4, import userController File
 const userController = require('./controller/userController')
+const userController = require('./controller/projectController') /* for the adding project details */
 
 // 2, create an object for router class
 const router = new express.Router();
@@ -12,6 +13,9 @@ router.post('/register', userController.registerController)
 
 // post login request 
 router.post('/login', userController.loginController)
+
+// post Add project details request
+router.post('/addproject', userController.addProjectController)
 
 
 
