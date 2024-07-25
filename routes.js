@@ -2,7 +2,11 @@
 const express = require('express');
 // 4, import userController File
 const userController = require('./controller/userController')
-const userController = require('./controller/projectController') /* for the adding project details */
+// import projectController File
+const projectController = require('./controller/projectController') /* for the adding project details */
+
+// import jwtmiddleware
+const jwt = require('./middleware/jwtMiddleware')
 
 // 2, create an object for router class
 const router = new express.Router();
@@ -15,7 +19,7 @@ router.post('/register', userController.registerController)
 router.post('/login', userController.loginController)
 
 // post Add project details request
-router.post('/addproject', userController.addProjectController)
+router.post('/addproject',jwt, projectController.addProjectController)
 
 
 
