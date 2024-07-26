@@ -6,7 +6,8 @@ const userController = require('./controller/userController')
 const projectController = require('./controller/projectController') /* for the adding project details */
 
 // import jwtmiddleware
-const jwt = require('./middleware/jwtMiddleware')
+const jwt = require('./middleware/jwtMiddleware');
+const multerConfig = require('./middleware/multerMiddleware');
 
 // 2, create an object for router class
 const router = new express.Router();
@@ -19,7 +20,8 @@ router.post('/register', userController.registerController)
 router.post('/login', userController.loginController)
 
 // post Add project details request
-router.post('/addproject',jwt, projectController.addProjectController)
+router.post('/addproject',jwt, multerConfig.single('projectImage'), projectController.addProjectController)
+                                                                    /* after passing through multer, addprojectcontroller req will have body & file object */
 
 
 
