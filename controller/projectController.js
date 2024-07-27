@@ -32,3 +32,44 @@ exports.addProjectController = async(req,res)=>{
 
   
 }
+exports.getAllProjectsController = async(req,res)=>{
+    const searchKey = req.query.search
+    console.log(searchKey)
+    try {
+        const query = {
+            language: {$regex:searchKey,$options : 'i'}
+        }
+        const allprojects = await projects.find(query)
+        if(allprojects){
+            res.status(200).json(allprojects)
+            
+        }else{
+            res.status(404).json('No projects found')
+        }
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
+
+exports.homeProjectController = async(req,res)=>{
+    try {
+        const homeProject = await projects.find().limit(3)
+        res.status(200).json(homeProject)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
+
+exports.userProjectController = async(req,res)=>{
+    const userID = req.payload
+    try {
+        const userProject = await projects.find({userID})
+        if(userProject){
+            res.status(200).json(userProject)
+        }else{
+            res.status(404).json('No projects found')
+        }
+    }catch(err){
+        res.status(401).json(err)
+    }
+}

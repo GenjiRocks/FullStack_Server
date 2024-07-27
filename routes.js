@@ -21,8 +21,16 @@ router.post('/login', userController.loginController)
 
 // post Add project details request
 router.post('/addproject',jwt, multerConfig.single('projectImage'), projectController.addProjectController)
-                                                                    /* after passing through multer, addprojectcontroller req will have body & file object */
+             /* after passing through multer, addprojectcontroller req will have body & file object */
 
+// all project
+router.get('/allprojects', jwt, projectController.getAllProjectsController)
+
+// home project
+router.get('/homeproject',projectController.homeProjectController)
+
+// User projects
+router.get('/userproject', jwt, projectController.userProjectController)
 
 
 // 4, Export the router

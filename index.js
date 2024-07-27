@@ -25,6 +25,11 @@ pfserver.use(express.json()) /* returns a middleware which can parse JSON format
 // use router - after creating routes (2) - after parsing bcuz data needs to be in readable form and not JSON format
 pfserver.use(router)
 
+// Export images from the uploads folder into /upload path
+pfserver.use('/uploads', express.static('./uploads'))/* first arg = folder name we using in the client side || second arg - static method to export the folder */
+// static method should have the path of export folder
+/* upload folder from server side to client side */
+
 // set port for the server
 port = 4000 || process.env.PORT
 
