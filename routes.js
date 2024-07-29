@@ -32,6 +32,9 @@ router.get('/homeproject',projectController.homeProjectController)
 // User projects
 router.get('/userproject', jwt, projectController.userProjectController)
 
+// Delete projects
+router.delete('/delete/:id', projectController.deleteProjectController)
+
 
 // 4, Export the router
 module.exports = router;
