@@ -90,3 +90,21 @@ exports.deleteProjectController = async(req,res)=>{
     }
         
 }
+
+exports.editProjectController = async (req,res)=>{
+    const {id} = req.params
+    const {userID} = req.payload
+    const {title,language,github,website,overview,projImage} = req.body
+    const uploadedImage = req.file?req.file.filename:projImage
+    try{
+        const existingProject = await projects.findByIdAndUpdate({_id:id},{
+            title,language,github,website,overview,projImage:uploadedImage,userID
+        })
+        await existingProject.save()
+        res.status(200).json(existingProject)
+    }
+    catch(err){
+        res.status(401).json(err)
+    }
+
+}
