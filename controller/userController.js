@@ -58,7 +58,7 @@ exports.editProfileController = async (req,res)=>{
    const profileImage = req.file?req.file.filename:profile
    try{
       const userProfile = await users.findByIdAndUpdate({_id:userID},
-         {username,email,password,github,linkedin, profile:profileImage}
+         {username,email,password,github,linkedin, profile:profileImage},{new:true}
       )
       await userProfile.save()
       res.status(200).json(userProfile)
